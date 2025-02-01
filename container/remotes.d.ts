@@ -12,6 +12,21 @@ declare module "Components/Input" {
   const Input: React.FC<InputProps>;
   export default Input;
 }
+
+declare module 'Components/Layout' {
+  import React, { ReactNode } from 'react';
+
+  interface LayoutProps {
+    children: ReactNode;
+    showLayout?: boolean;
+  }
+
+  const Layout: React.FC<LayoutProps>;
+
+  export default Layout;
+}
+
+
 declare module 'Auth/Login' {
   const Auth: React.ComponentType;
   export default Auth;
@@ -35,4 +50,5 @@ declare module 'Rewards/RewardsScreen' {
   const Auth: React.ComponentType;
   export default Auth;
 } 
+
 

@@ -131,7 +131,7 @@ module.exports = {
       name: "Components",
       filename: "ComponentsEntry.js",
       exposes: {
-        './Style': './src/assets/scss/app.scss',
+        './Style': './src/assets/scss/style.js',
         './Input': './src/components/input',
         "./TextArea": "./src/components/textArea",
         "./SelectDropdown": "./src/components/selectDropdown",
@@ -143,6 +143,7 @@ module.exports = {
         "./CustomRadioGroup": "./src/components/customRadioGroup",
         "./CustomToggleSwitch": "./src/components/customToggleSwitch",
         "./PrimaryButton": "./src/components/primaryButton",
+        "./Layout": "./src/layout",
         // './Button': './src/components/button',
         // './UseAuth': './src/hooks/useAuth',
         // './AxiosService': './src/helpers',

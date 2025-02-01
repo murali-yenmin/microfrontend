@@ -1,5 +1,4 @@
-import React from "react";
-import { Link, Links } from "react-router-dom";
+import React from "react"; 
 
 const SideBar = () => {
   return (

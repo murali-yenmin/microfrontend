@@ -1,3 +1,78 @@
+@import "./reset.scss";
+@import "./variables.scss";
+@import './header.scss';
+@import './sideBar.scss';
 
-// import 'Components/Style';
-// @import "./variables.scss";
+* {
+    font-family: 'Roboto' !important;
+}
+
+body {
+    background: #ededed;
+}
+
+h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    color: $fontColor;
+}
+
+a:hover,
+a {
+    text-decoration: none !important;
+}
+.primayBtn,.secountryBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    background: $primay;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.secountryBtn{
+    color: $black;
+    background: $white;
+    border: 1px solid $gary;
+}
+// ========== Field style ======
+input,
+input:focus,
+textarea,
+textarea:focus,
+textarea:focus-visible {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid $border;
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+    height: 64px;
+}
+
+//=============== Layout Style ===========
+
+.layout{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.body{
+    width: 100%;
+}
+
+.content{
+    padding: 20px;
+    // height: calc(100vh - 80px);
+}

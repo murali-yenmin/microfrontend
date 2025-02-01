@@ -111,7 +111,7 @@ const Login: React.FC = () => {
       <p>Password: {passwordInputValue}</p>
       <hr />
       <SelectDropdown
-        onSelect={(e) => {
+        onSelect={(e:any) => {
           setselectDropdownValue(e);
         }}
         options={[

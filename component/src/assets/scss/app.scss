@@ -1,13 +1,11 @@
-@import './../fonts/stylesheet.css';
 @import "./reset.scss";
 @import "./variables.scss";
-// @import './header.scss';
-// @import './sideBar.scss';
+@import './header.scss';
+@import './sideBar.scss';
 
 * {
     font-family: 'Roboto' !important;
 }
-
 
 body {
     background: #ededed;
@@ -76,5 +74,5 @@ textarea {
 
 .content{
     padding: 20px;
-    height: calc(100vh - 80px);
+    // height: calc(100vh - 80px);
 }

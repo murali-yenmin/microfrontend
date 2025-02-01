@@ -49,7 +49,7 @@ declare module "Components/PasswordInput" {
   export type PasswordInputProps = {
     field: {
       fieldName: string;
-    };
+    }
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
@@ -105,10 +105,10 @@ declare module "Components/CustomCheckboxGroup" {
     value: string;
     label: string;
   }
-// Declaring SCSS file imported from the Components project
-declare module 'Components/Style'     
+  // Declaring SCSS file imported from the Components project
+  declare module 'Components/Style'
 
-  
+
 
   export type CustomCheckboxGroupProps = {
     label: string;
@@ -155,6 +155,11 @@ declare module "Components/CustomToggleSwitch" {
   const CustomToggleSwitch: React.FC<CustomToggleSwitchProps>;
   export default CustomToggleSwitch;
 }
+// Declaring SCSS file imported from the Components project
+declare module 'Components/Style' {
+  const Style: any; // Treat the SCSS file as a string (importing CSS directly)
+  export default Style;
+}
 
 declare module "Components/PrimaryButton" {
   import React from "react";
@@ -169,3 +174,6 @@ declare module "Components/PrimaryButton" {
   const PrimaryButton: React.FC<PrimaryButtonProps>;
   export default PrimaryButton;
 }
+ 
+
+

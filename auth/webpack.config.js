@@ -63,12 +63,12 @@ module.exports = {
         react: {
           singleton: true,
           eager: true, // Force eager loading
-          requiredVersion: "^18.0.0", // Specify the required version
+          requiredVersion: "18.3.1", // Specify the required version
         },
         "react-dom": {
           singleton: true,
           eager: true, // Force eager loading
-          requiredVersion: "^18.0.0", // Specify the required version
+          requiredVersion: "18.3.1", // Specify the required version
         },
         // 'react-router-dom': {
         //   singleton: true,
