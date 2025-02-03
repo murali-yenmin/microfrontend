@@ -7,7 +7,7 @@
 @import './model/sideBar.scss';
 
 * {
-    font-family: 'Roboto' !important;
+    font-family: $font-family !important;
 }
 
 body {
