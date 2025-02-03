@@ -81,109 +81,145 @@ module.exports = {
     }),
       {
           // Custom Plugin for Downloading SCSS Variables
-          apply: (compiler) => {
-            compiler.hooks.done.tapAsync("DownloadVariables", async (stats, callback) => {
-              try {
-                // Fetch the remote SCSS files
-                const [variablesResponse, resetResponse] = await Promise.all([
-                  axios.get("http://localhost:3001/variables.scss", { responseType: "text" }),
-                  axios.get("http://localhost:3001/reset.scss", { responseType: "text" })
-                ]);
-          
-                const remoteVariablesContent = variablesResponse.data;
-                const remoteResetContent = resetResponse.data;
-          
-                const variablesFilePath = path.resolve(__dirname, "./src/assets/scss/variables.scss");
-                const resetFilePath = path.resolve(__dirname, "./src/assets/scss/reset.scss");
-          
-                // Check if the local files exist
-                const variablesLocalExists = fs.existsSync(variablesFilePath);
-                const resetLocalExists = fs.existsSync(resetFilePath);
-          
-                let variablesLocalContent = '';
-                let resetLocalContent = '';
-          
-                if (variablesLocalExists) {
-                  variablesLocalContent = fs.readFileSync(variablesFilePath, 'utf-8');
-                }
-          
-                if (resetLocalExists) {
-                  resetLocalContent = fs.readFileSync(resetFilePath, 'utf-8');
-                }
-          
-                // Compare and update variables.scss
-                if (remoteVariablesContent !== variablesLocalContent) {
-                  fs.ensureFileSync(variablesFilePath);
-                  fs.writeFileSync(variablesFilePath, remoteVariablesContent);
-                  console.log("variables.scss updated successfully.");
-                } else {
-                  console.log("No changes in variables.scss. Local file is up to date.");
-                }
-          
-                // Compare and update reset.scss
-                if (remoteResetContent !== resetLocalContent) {
-                  fs.ensureFileSync(resetFilePath);
-                  fs.writeFileSync(resetFilePath, remoteResetContent);
-                  console.log("reset.scss updated successfully.");
-                } else {
-                  console.log("No changes in reset.scss. Local file is up to date.");
-                }
-          
-                // Callback to notify Webpack that the hook is complete
-                callback();
-              } catch (error) {
-                console.error("Error downloading or comparing SCSS files:", error);
-                callback(error); // In case of error, pass it to callback
-              }
-            });
-          
-            // Watch for changes periodically (e.g., every 5 seconds)
-            setInterval(async () => {
-              try {
-                const [variablesResponse, resetResponse] = await Promise.all([
-                  axios.get("http://localhost:3001/variables.scss", { responseType: "text" }),
-                  axios.get("http://localhost:3001/reset.scss", { responseType: "text" })
-                ]);
-          
-                const remoteVariablesContent = variablesResponse.data;
-                const remoteResetContent = resetResponse.data;
-          
-                const variablesFilePath = path.resolve(__dirname, "./src/assets/scss/variables.scss");
-                const resetFilePath = path.resolve(__dirname, "./src/assets/scss/reset.scss");
-          
-                const variablesLocalExists = fs.existsSync(variablesFilePath);
-                const resetLocalExists = fs.existsSync(resetFilePath);
-          
-                let variablesLocalContent = '';
-                let resetLocalContent = '';
-          
-                if (variablesLocalExists) {
-                  variablesLocalContent = fs.readFileSync(variablesFilePath, 'utf-8');
-                }
-          
-                if (resetLocalExists) {
-                  resetLocalContent = fs.readFileSync(resetFilePath, 'utf-8');
-                }
-          
-                // Compare and update variables.scss
-                if (remoteVariablesContent !== variablesLocalContent) {
-                  fs.ensureFileSync(variablesFilePath);
-                  fs.writeFileSync(variablesFilePath, remoteVariablesContent);
-                  console.log("variables.scss updated due to remote changes.");
-                }
-          
-                // Compare and update reset.scss
-                if (remoteResetContent !== resetLocalContent) {
-                  fs.ensureFileSync(resetFilePath);
-                  fs.writeFileSync(resetFilePath, remoteResetContent);
-                  console.log("reset.scss updated due to remote changes.");
-                }
-          
-              } catch (error) {
-                console.error("Error checking remote changes:", error);
-              }
-            }, 5000); // Check every 5 seconds
-          },
+            // Custom Plugin for Downloading SCSS Variables
+                apply: (compiler) => {
+                  compiler.hooks.done.tapAsync("DownloadSCSS", async (stats, callback) => {
+                    try {
+                      // Fetch the remote SCSS files
+                      const [variablesResponse, resetResponse, globalResponse] = await Promise.all([
+                        axios.get("http://localhost:3001/variables.scss", { responseType: "text" }),
+                        axios.get("http://localhost:3001/reset.scss", { responseType: "text" }),
+                        axios.get("http://localhost:3001/global.scss", { responseType: "text" })
+                      ]);
+                
+                      const remoteVariablesContent = variablesResponse.data;
+                      const remoteResetContent = resetResponse.data;
+                      const remoteGlobalContent = globalResponse.data;
+                
+                      const variablesFilePath = path.resolve(__dirname, "./src/assets/scss/variables.scss");
+                      const resetFilePath = path.resolve(__dirname, "./src/assets/scss/reset.scss");
+                      const globalFilePath = path.resolve(__dirname, "./src/assets/scss/global.scss");
+                
+                      // Check if the local files exist
+                      const variablesLocalExists = fs.existsSync(variablesFilePath);
+                      const resetLocalExists = fs.existsSync(resetFilePath);
+                      const globalLocalExists = fs.existsSync(globalFilePath);
+                
+                      let variablesLocalContent = '';
+                      let resetLocalContent = '';
+                      let globalLocalContent = '';
+                
+                      if (variablesLocalExists) {
+                        variablesLocalContent = fs.readFileSync(variablesFilePath, 'utf-8');
+                      }
+                
+                      if (resetLocalExists) {
+                        resetLocalContent = fs.readFileSync(resetFilePath, 'utf-8');
+                      }
+                
+                      if (globalLocalExists) {
+                        globalLocalContent = fs.readFileSync(globalFilePath, 'utf-8');
+                      }
+                
+                      // Compare and update variables.scss
+                      if (remoteVariablesContent !== variablesLocalContent) {
+                        fs.ensureFileSync(variablesFilePath);
+                        fs.writeFileSync(variablesFilePath, remoteVariablesContent);
+                        console.log("variables.scss updated successfully.");
+                      } else {
+                        console.log("No changes in variables.scss. Local file is up to date.");
+                      }
+                
+                      // Compare and update reset.scss
+                      if (remoteResetContent !== resetLocalContent) {
+                        fs.ensureFileSync(resetFilePath);
+                        fs.writeFileSync(resetFilePath, remoteResetContent);
+                        console.log("reset.scss updated successfully.");
+                      } else {
+                        console.log("No changes in reset.scss. Local file is up to date.");
+                      }
+                
+                      // Compare and update global.scss
+                      if (remoteGlobalContent !== globalLocalContent) {
+                        fs.ensureFileSync(globalFilePath);
+                        fs.writeFileSync(globalFilePath, remoteGlobalContent);
+                        console.log("global.scss updated successfully.");
+                      } else {
+                        console.log("No changes in global.scss. Local file is up to date.");
+                      }
+                
+                      // Callback to notify Webpack that the hook is complete
+                      callback();
+                    } catch (error) {
+                      console.error("Error downloading or comparing SCSS files:", error);
+                      callback(error); // In case of error, pass it to callback
+                    }
+                  });
+                
+                  // Watch for changes periodically (e.g., every 5 seconds)
+                  setInterval(async () => {
+                    try {
+                      const [variablesResponse, resetResponse, globalResponse] = await Promise.all([
+                        axios.get("http://localhost:3001/variables.scss", { responseType: "text" }),
+                        axios.get("http://localhost:3001/reset.scss", { responseType: "text" }),
+                        axios.get("http://localhost:3001/global.scss", { responseType: "text" })
+                      ]);
+                
+                      const remoteVariablesContent = variablesResponse.data;
+                      const remoteResetContent = resetResponse.data;
+                      const remoteGlobalContent = globalResponse.data;
+                
+                      const variablesFilePath = path.resolve(__dirname, "./src/assets/scss/variables.scss");
+                      const resetFilePath = path.resolve(__dirname, "./src/assets/scss/reset.scss");
+                      const globalFilePath = path.resolve(__dirname, "./src/assets/scss/global.scss");
+                
+                      const variablesLocalExists = fs.existsSync(variablesFilePath);
+                      const resetLocalExists = fs.existsSync(resetFilePath);
+                      const globalLocalExists = fs.existsSync(globalFilePath);
+                
+                      let variablesLocalContent = '';
+                      let resetLocalContent = '';
+                      let globalLocalContent = '';
+                
+                      if (variablesLocalExists) {
+                        variablesLocalContent = fs.readFileSync(variablesFilePath, 'utf-8');
+                      }
+                
+                      if (resetLocalExists) {
+                        resetLocalContent = fs.readFileSync(resetFilePath, 'utf-8');
+                      }
+                
+                      if (globalLocalExists) {
+                        globalLocalContent = fs.readFileSync(globalFilePath, 'utf-8');
+                      }
+                
+                      // Compare and update variables.scss
+                      if (remoteVariablesContent !== variablesLocalContent) {
+                        fs.ensureFileSync(variablesFilePath);
+                        fs.writeFileSync(variablesFilePath, remoteVariablesContent);
+                        console.log("variables.scss updated due to remote changes.");
+                      }
+                
+                      // Compare and update reset.scss
+                      if (remoteResetContent !== resetLocalContent) {
+                        fs.ensureFileSync(resetFilePath);
+                        fs.writeFileSync(resetFilePath, remoteResetContent);
+                        console.log("reset.scss updated due to remote changes.");
+                      }
+                
+                      // Compare and update global.scss
+                      if (remoteGlobalContent !== globalLocalContent) {
+                        fs.ensureFileSync(globalFilePath);
+                        fs.writeFileSync(globalFilePath, remoteGlobalContent);
+                        console.log("global.scss updated due to remote changes.");
+                      }
+                
+                    } catch (error) {
+                      console.error("Error checking remote changes:", error);
+                    }
+                  }, 5000); // Check every 5 seconds
+                },
+                
           
         },
   ],
