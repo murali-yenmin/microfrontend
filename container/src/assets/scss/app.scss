@@ -1,7 +1,5 @@
 @import "./reset.scss";
-@import "./variables.scss";
-@import './header.scss';
-@import './sideBar.scss';
+@import "./variables.scss"; 
 
 * {
     font-family: 'Roboto' !important;
@@ -76,3 +74,4 @@ textarea {
     padding: 20px;
     // height: calc(100vh - 80px);
 }
+ 

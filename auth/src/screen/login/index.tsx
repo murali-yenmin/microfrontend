@@ -106,7 +106,7 @@ const Login: React.FC = () => {
       <hr />
       <PasswordInput
         field={{ fieldName: "Password" }}
-        onChange={(e) => setpasswordInputValue(e.target.value)}
+        onChange={(e:any) => setpasswordInputValue(e.target.value)}
       />
       <p>Password: {passwordInputValue}</p>
       <hr />

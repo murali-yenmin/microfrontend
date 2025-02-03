@@ -1,5 +1,5 @@
 import React from "react"; 
-
+import '../../assets/scss/app.scss';
 const SideBar = () => {
   return (
     <div className="sideBar">

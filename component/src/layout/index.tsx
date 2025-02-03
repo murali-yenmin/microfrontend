@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Header from "../components/header";
 import SideBar from '../components/sideBar'; 
+import '../assets/scss/app.scss';
 
 const Layout = ({ children, showLayout = true }:any) => {
     if (!showLayout) {

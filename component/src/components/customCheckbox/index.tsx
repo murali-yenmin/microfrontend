@@ -1,3 +1,4 @@
+import '../../assets/scss/app.scss';
 export interface customCheckboxProps {
   onChange: Function;
   checked: boolean | undefined;

@@ -1,8 +1,10 @@
 @import "./reset.scss";
 @import "./variables.scss";
-@import './global.scss';
-@import './header.scss';
-@import './sideBar.scss';
+@import './global.scss';  
+@import './model/primaryButton.scss';
+@import './model/layout.scss';
+@import './model/header.scss';
+@import './model/sideBar.scss';
 
 * {
     font-family: 'Roboto' !important;
@@ -17,8 +19,7 @@ h6 {
 }
 
 p {
-    margin: 0;
-    color: $fontColor;
+    margin: 0; 
 }
 
 a:hover,
@@ -63,11 +64,7 @@ textarea {
 
 //=============== Layout Style ===========
 
-.layout{
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-}
+
 
 .body{
     width: 100%;

@@ -1,4 +1,5 @@
 import React from "react";
+import '../../assets/scss/app.scss';
 
 interface Field {
   fieldName: string;
@@ -15,6 +16,7 @@ const Input: React.FC<InputProps> = ({ field, onChange }) => {
     <div>
       <label htmlFor={field.fieldName}>{field.fieldName}</label>
       <input
+
         type={field.type || "text"}
         name={field.fieldName}
         placeholder={field.fieldName}

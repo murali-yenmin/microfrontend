@@ -48,6 +48,7 @@ module.exports = {
           "sass-loader", // Compiles SCSS into CSS
         ],
       },
+      
     ],
   },
   plugins: [

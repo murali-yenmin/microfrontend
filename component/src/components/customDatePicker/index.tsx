@@ -1,3 +1,4 @@
+import '../../assets/scss/app.scss';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
 export interface datepickerProps {

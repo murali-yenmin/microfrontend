@@ -3,6 +3,7 @@ import OutsideClick from "../../utils/OutsideClick";
 import dropDownIcon from "./dropdown-icon.png";
 import searchIcon from "./search-icon.png";
 import Scrollbar from "smooth-scrollbar";
+import '../../assets/scss/app.scss';
 
 export interface SelectDropdownProps {
   options: Array<Record<string, any>>;

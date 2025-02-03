@@ -1,3 +1,4 @@
+import '../../assets/scss/app.scss';
 import React, { useState, useEffect } from "react";
 
 interface CheckboxOption {

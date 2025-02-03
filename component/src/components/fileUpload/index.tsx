@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import '../../assets/scss/app.scss';
 interface FileUploadProps {
   id: string;
   name: string;
